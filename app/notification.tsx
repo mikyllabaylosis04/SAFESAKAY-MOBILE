@@ -355,7 +355,7 @@ export default function NotificationScreen() {
           )}
         </ScrollView>
       </SafeAreaView>
-      {operator ? <OperatorTabs active="home" /> : <PassengerTabs active="home" />}
+      {operator ? <OperatorTabs /> : <PassengerTabs />}
       <SideMenu visible={menuOpen} onClose={() => setMenuOpen(false)} />
     </View>
   );

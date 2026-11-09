@@ -11,7 +11,7 @@ import { useAppTheme } from '@/lib/theme';
 export type OperatorTabKey = 'home' | 'requests' | 'transactions' | 'boats' | 'profile';
 
 type Props = {
-  active: OperatorTabKey;
+  active?: OperatorTabKey;
 };
 
 const TABS: {
