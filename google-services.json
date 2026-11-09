@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "202948921249",
+    "project_id": "safesakay-c0763",
+    "storage_bucket": "safesakay-c0763.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:202948921249:android:895035446017d5cc146de0",
+        "android_client_info": {
+          "package_name": "com.safesakay.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBk8g8yEL3bGYiXsWkPf6z0461izehFOYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
