@@ -61,6 +61,7 @@ function hostOf(base: string): string | null {
 }
 
 const LARAVEL_PORT = 8000;
+const PRODUCTION_API_ORIGIN = 'https://safesakay-web-production.up.railway.app';
 
 function laravelBaseForHost(host: string): string {
   return `http://${host}:${LARAVEL_PORT}`;
@@ -74,11 +75,16 @@ function isPrivateLanHost(host: string): boolean {
   );
 }
 
+function isLocalDevHost(host: string): boolean {
+  return isPrivateLanHost(host) || host === 'localhost' || host.startsWith('127.');
+}
+
+/** Returns the server origin; request paths already include `/api`, so a trailing `/api` is dropped. */
 function normalizeApiBase(base: string): string | null {
   try {
     const url = new URL(base);
 
-    if (url.port === '') {
+    if (url.port === '' && url.protocol === 'http:' && isLocalDevHost(url.hostname)) {
       url.port = String(LARAVEL_PORT);
     }
 
@@ -99,10 +105,10 @@ function configuredApiBaseOverride(): string | null {
     ?? process.env.EXPO_PUBLIC_API_URL;
 
   if (typeof envBase === 'string' && envBase.trim() !== '') {
-    return normalizeApiBase(envBase.trim()) ?? envBase.trim().replace(/\/$/, '');
+    return normalizeApiBase(envBase.trim()) ?? envBase.trim().replace(/\/(api\/?)?$/, '');
   }
 
-  return null;
+  return __DEV__ ? null : PRODUCTION_API_ORIGIN;
 }
 
 export async function hydrateApiBase(): Promise<void> {
@@ -157,6 +163,11 @@ export function rememberApiBase(base: string): void {
 export function getApiBaseUrls(): string[] {
   const urls: string[] = [];
 
+  if (!__DEV__) {
+    const production = configuredApiBaseOverride();
+    return production ? [production] : [];
+  }
+
   if (Platform.OS === 'web') {
     return ['http://localhost:8081', 'http://127.0.0.1:8081', 'http://localhost:8000'];
   }
@@ -187,6 +198,10 @@ export function getUploadBaseUrls(): string[] {
 }
 
 export function getApiBaseUrl(): string {
+  if (!__DEV__) {
+    return getApiBaseUrls()[0] ?? PRODUCTION_API_ORIGIN;
+  }
+
   return rememberedBase ?? getApiBaseUrls()[0];
 }
 

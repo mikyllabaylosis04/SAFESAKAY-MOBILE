@@ -43,7 +43,6 @@ export function passengerFilterAlertCount(
     return alerts.filter(
       (item) =>
         item.status === 'cancelled' ||
-        item.status === 'rejected' ||
         item.status === 'passenger_no_show' ||
         Boolean(item.can_choose_refund_or_reschedule),
     ).length;

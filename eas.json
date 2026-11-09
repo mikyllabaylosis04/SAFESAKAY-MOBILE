@@ -6,12 +6,20 @@
   "build": {
     "preview": {
       "distribution": "internal",
+      "environment": "preview",
       "android": {
         "buildType": "apk"
+      },
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://safesakay-web-production.up.railway.app/api"
       }
     },
     "production": {
-      "autoIncrement": true
+      "autoIncrement": true,
+      "environment": "production",
+      "env": {
+        "EXPO_PUBLIC_API_URL": "https://safesakay-web-production.up.railway.app/api"
+      }
     }
   },
   "submit": {

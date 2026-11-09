@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "safesakay",
+    "name": "SafeSakay",
     "slug": "safesakay",
+    "owner": "mikyllagwapa",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -12,10 +13,6 @@
       "eas": {
         "projectId": "a60fbf20-99e3-45eb-89bf-81be7762ad1a"
       }
-    },
-    "androidNavigationBar": {
-      "backgroundColor": "#FFFFFF",
-      "barStyle": "dark-content"
     },
     "updates": {
       "enabled": false,
@@ -97,7 +94,8 @@
             "usesCleartextTraffic": true
           }
         }
-      ]
+      ],
+      "expo-sharing"
     ],
     "experiments": {
       "typedRoutes": true
